@@ -44,7 +44,7 @@ export default new Vuex.Store({
         //當數量改變時，獲取當前步進器所屬的商品id，在store中的對應count
         if (item.id == goodsInfo.id) {
           item.count = goodsInfo.count
-          console.log('數量', item.count)
+          // console.log('數量', item.count)
         }
       })
       localStorage.setItem('car', JSON.stringify(state.car))
@@ -71,8 +71,8 @@ state.car.forEach(item=>{
 })
 return c;
     },
-allPrice(){
-  let all={};
+// allPrice(){
+//   let all={};
 //單價數組p[id] 拿到單價
 //數量數組c[id] 拿到數量
 //兩者相乘p[id]*c[id] 得到數組結果a
@@ -80,7 +80,7 @@ allPrice(){
 
 
 
-}
+// }
 
   },
   actions: {
@@ -106,7 +106,7 @@ allPrice(){
         // 設置對象的屬性{id1:count1, id2:count2, id3:count3}
         o[item.id] = item.count;
       })
-      console.log(o);
+      // console.log(o);
       return o;
     },
     

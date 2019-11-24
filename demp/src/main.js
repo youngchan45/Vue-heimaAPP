@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router/index.js'
 import store from './store/index.js'
-import VueLazyload from 'vue-lazyload'
+// import VueLazyload from 'vue-lazyload'
 // import axios from 'axios'
 // import VueAxios from 'vue-axios'
 import {
