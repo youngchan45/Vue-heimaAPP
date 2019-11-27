@@ -5,7 +5,7 @@
     <!--商品部分-->
     <van-checkbox-group v-model="result" ref="checkboxGroup" class="container">
       <div v-for="(item,index) in carList" :key="index">
-        <van-checkbox :name="item" ref='name'>
+        <van-checkbox :name="item" ref="name">
           <div class="goodsItem">
             <img class="imgs" :src="item.thumb_path" alt="商品圖片" />
             <div class="info">
@@ -40,7 +40,7 @@
         <van-button type="primary" size="small" @click="checkAll">全选</van-button>
         <!-- <van-checkbox v-model="allBtn" @click="checkAll" name='all'>全选</van-checkbox> -->
         <div>
-          <span>合计：(价格)</span>
+          <span>合计：{{$store.getters.getAllPrice.amount}}</span>
           <van-button type="danger" size="small">结算（{{this.result.length}}）</van-button>
         </div>
       </div>
@@ -54,9 +54,12 @@ import Stepper from "../subcomponent/Stepper.vue";
 export default {
   data() {
     return {
-      result: [],
+      
       // all: false,
+      //购物车的所有商品数组
       carList: [],
+      //已勾选的商品数组
+      result: [],     
       isPay: false,
       isZero: false,
       allBtn: false
@@ -64,8 +67,8 @@ export default {
   },
   created() {
     this.getCarList();
+    this.getAllPrice();
     // this.all();
-    console.log('已選', this.result);
   },
   methods: {
     // all(){
@@ -73,7 +76,6 @@ export default {
     // },
     checkAll() {
       // this.all = !this.all
-
       // 如果添加的數組裡面(代表已勾選)長度等於購物車裡的數組數量，那點擊按鈕時就是反選；除此之外的情況就是全選
       if (this.result.length == this.$store.state.car.length) {
         this.$refs.checkboxGroup.toggleAll(false);
@@ -82,15 +84,19 @@ export default {
       }
       // console.log(this.result,this.all)
     },
+
+    //渲染已放入购物车的商品列表
     getCarList() {
-      //經常漏掉$store
+      //新建一个数组，用以存放放入购物车的的商品的id
       let idArr = [];
       // idArr = this.$store.state.car;
       // console.log(idArr);
+      //經常漏掉$store
       this.$store.state.car.forEach(item => {
         idArr.push(item.id);
       });
       // console.log(idArr);
+      //如果这个数组为空，则代表这个购物车为空，此时展示‘购物车为空 ’的界面
       if (idArr.length <= 0) {
         this.isPay = true;
         this.isZero = true;
@@ -107,12 +113,13 @@ export default {
           this.carList = res.data.message;
           this.isPay = false;
           this.isZero = false;
-          console.log(res);
         });
     },
+    //购物车为空时，点击文字前往商品列表页面
     goShop() {
       this.$router.push("/home/goodslist");
     },
+    //删除商品
     del(itemId, index) {
       //之前學習的刪除方式（傳遞index）是將信息從頁面的渲染中刪去，因為這裡還涉及到本地存儲，所以不僅要從頁面刪去，還要從store的本地存儲中刪去
       //頁面刪去
@@ -122,9 +129,26 @@ export default {
       this.$store.commit("delLocalGoods", itemId);
       // console.log(this.item.id)
     },
-    goodsPay(p){
-      
-    }
+    //循环已勾选数组，把每一个的总价往总价数组里面丢
+getAllPrice(){
+var o ={
+  amount:0 //勾选的总价
+}
+this.result.forEach(item=>{
+  o.amount+=item.price*item.count
+})
+return o;
+}
+//     clickGoods(){
+//       let p ={}
+
+// // state.car.forEach(item => {
+// //         c[item.id] = item.count
+// //       })
+// //       return c;
+
+//       p[item.p]=this.result.sell_price
+//     }
   },
   components: {
     stepper: Stepper

@@ -55,7 +55,7 @@
 <script>
 import Vue from "vue";
 import axios from "axios";
-import Newsinfo from "./Newsinfo.vue";
+// import Newsinfo from "./Newsinfo";
 // import img from "../../assets/img/news.jpg";
 // import menu from "../../assets/img/menu1.png";
 
