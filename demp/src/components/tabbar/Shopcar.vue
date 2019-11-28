@@ -41,7 +41,7 @@
         <!-- <van-checkbox v-model="allBtn" @click="checkAll" name='all'>全选</van-checkbox> -->
         <div>
           <span>合计：{{$store.getters.getAllPrice.amount}}</span>
-          
+
           <van-button type="danger" size="small">结算（{{this.result.length}}）</van-button>
         </div>
       </div>
@@ -55,12 +55,11 @@ import Stepper from "../subcomponent/Stepper.vue";
 export default {
   data() {
     return {
-      
       // all: false,
       //购物车的所有商品数组
       carList: [],
       //已勾选的商品数组
-      result: [],     
+      result: [],
       isPay: false,
       isZero: false,
       allBtn: false
@@ -128,28 +127,34 @@ export default {
       //易錯：本地存儲不是寫在這裡
       // localStorage.removeItem('id')
       this.$store.commit("delLocalGoods", itemId);
+      //删除后再判断一次页面渲染的切换
+      if (this.carList.length <= 0) {
+        this.isPay = true;
+        this.isZero = true;
+        return;
+      }
       // console.log(this.item.id)
     },
     //循环已勾选数组，把每一个的总价往总价数组里面丢
-getAllPrice(){
-var o ={
-  amount:0 //勾选的总价
-}
-this.result.forEach(item=>{
-  o.amount+=item.price*item.count
-})
-return o;
-}
-//     clickGoods(){
-//       let p ={}
+    getAllPrice() {
+      var o = {
+        amount: 0 //勾选的总价
+      };
+      this.result.forEach(item => {
+        o.amount += item.price * item.count;
+      });
+      return o;
+    }
+    //     clickGoods(){
+    //       let p ={}
 
-// // state.car.forEach(item => {
-// //         c[item.id] = item.count
-// //       })
-// //       return c;
+    // // state.car.forEach(item => {
+    // //         c[item.id] = item.count
+    // //       })
+    // //       return c;
 
-//       p[item.p]=this.result.sell_price
-//     }
+    //       p[item.p]=this.result.sell_price
+    //     }
   },
   components: {
     stepper: Stepper
