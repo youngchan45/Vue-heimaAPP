@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="appContainer">
     <!-- 顶部名称 -->
-    <van-nav-bar fixed title="标题">
+    <van-nav-bar fixed :title="$route.name">
       <span slot="left" @click="onClickLeft" v-show="flag">
         <span>
           <van-icon name="arrow-left" />返回
@@ -55,10 +55,21 @@ export default {
       flag: false
     };
   },
+  props: ["name"],
   mounted() {
     // setFontSize();
   },
-  created() {},
+  created() {
+    // this.flag=this.$route.path=== "/home" ||
+    //     this.$route.path === "/member" ||
+    //     this.$route.path === "/shopcar" ||
+    //     this.$route.path === "/search"?false:true
+    //       // this.flag=this.$route.path=== "/home"?false:true
+    //       // this.flag=this.$route.path === "/member"?false:true
+    //       // this.flag=this.$route.path === "/shopcar"?false:true
+    //       // this.flag=this.$route.path === "/search"?false:true
+    // this.watch;
+  },
   methods: {
     setFontSize() {
       let docEl = document.documentElement,
@@ -82,17 +93,21 @@ export default {
     }
   },
   watch: {
-    "$route.path": function(newVal) {
-      if (
-        newVal === "/home" ||
-        newVal === "/member" ||
-        newVal === "/shopcar" ||
-        newVal === "/search"
-      ) {
-        this.flag = false;
-      } else {
-        this.flag = true;
-      }
+    //深度监听：immediate执行handler里的方法
+    "$route.path": {
+      handler: function(newVal) {
+        if (
+          newVal === "/home" ||
+          newVal === "/member" ||
+          newVal === "/shopcar" ||
+          newVal === "/search"
+        ) {
+          this.flag = false;
+        } else {
+          this.flag = true;
+        }
+      },
+      immediate: true
     }
   }
 };

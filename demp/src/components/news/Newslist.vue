@@ -59,21 +59,22 @@ import axios from "axios";
 // import img from "../../assets/img/news.jpg";
 // import menu from "../../assets/img/menu1.png";
 
-Vue.filter("timeset", str => {
-  var dt = new Date(str);
-  var y = dt.getFullYear();
-  var m = ("0" + (dt.getMonth() + 1)).slice(-2);
-  var d = ("0" + dt.getDate()).slice(-2);
-  var h = ("0" + dt.getHours()).slice(-2);
-  var mm = ("0" + dt.getMinutes()).slice(-2);
-  // var s= ('0'+dt.getSeconds()).slice(-2)
-  var s = dt
-    .getSeconds()
-    .toString()
-    .padStart(2, "0");
+//把过滤器全局注册 所以挪到main.js文件
+// Vue.filter("timeset", str => {
+//   var dt = new Date(str);
+//   var y = dt.getFullYear();
+//   var m = ("0" + (dt.getMonth() + 1)).slice(-2);
+//   var d = ("0" + dt.getDate()).slice(-2);
+//   var h = ("0" + dt.getHours()).slice(-2);
+//   var mm = ("0" + dt.getMinutes()).slice(-2);
+//   // var s= ('0'+dt.getSeconds()).slice(-2)
+//   var s = dt
+//     .getSeconds()
+//     .toString()
+//     .padStart(2, "0");
 
-  return `${y}-${m}-${d} ${h}:${mm}:${s}`;
-});
+//   return `${y}-${m}-${d} ${h}:${mm}:${s}`;
+// });
 export default {
   data() {
     return {

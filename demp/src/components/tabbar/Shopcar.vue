@@ -41,6 +41,7 @@
         <!-- <van-checkbox v-model="allBtn" @click="checkAll" name='all'>全选</van-checkbox> -->
         <div>
           <span>合计：{{$store.getters.getAllPrice.amount}}</span>
+          
           <van-button type="danger" size="small">结算（{{this.result.length}}）</van-button>
         </div>
       </div>
