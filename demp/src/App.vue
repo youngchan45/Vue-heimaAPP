@@ -1,7 +1,13 @@
 <template>
   <div id="app" class="appContainer">
     <!-- 顶部名称 -->
-    <van-nav-bar fixed title="商城test" />
+    <van-nav-bar fixed title="标题">
+      <span slot="left" @click="onClickLeft" v-show="flag">
+        <span>
+          <van-icon name="arrow-left" />返回
+        </span>
+      </span>
+    </van-nav-bar>
     <!-- 中间组件 -->
     <transition name="mainTrans">
       <router-view></router-view>
@@ -45,7 +51,8 @@
 export default {
   data() {
     return {
-      active: "home"
+      active: "home",
+      flag: false
     };
   },
   mounted() {
@@ -69,6 +76,23 @@ export default {
       window.addEventListener(resizeEvt, recalc, false);
       document.addEventListener("DOMContentLoaded", recalc, false);
       recalc();
+    },
+    onClickLeft() {
+      this.$router.go(-1);
+    }
+  },
+  watch: {
+    "$route.path": function(newVal) {
+      if (
+        newVal === "/home" ||
+        newVal === "/member" ||
+        newVal === "/shopcar" ||
+        newVal === "/search"
+      ) {
+        this.flag = false;
+      } else {
+        this.flag = true;
+      }
     }
   }
 };
