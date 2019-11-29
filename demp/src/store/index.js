@@ -56,7 +56,7 @@ export default new Vuex.Store({
         if (item.id == itemId) {
           state.car.splice(i, 1);
           return true;
-        }        
+        }
       })
       localStorage.setItem('car', JSON.stringify(state.car))
     },
@@ -106,16 +106,17 @@ export default new Vuex.Store({
     },
 
     //循环已勾选数组，把每一个的总价往总价数组里面丢
-    getAllPrice(state){
-      var o ={
-        amount:0 //勾选的总价
+    getAllPrice(state) {
+      var o = {
+        amount: 0 //勾选的总价
       }
       state.car.forEach(
-        item=>{if(item.selected){
-          o.amount+=item.price*item.count
-        }
-      })
+        item => {
+          if (item.selected) {
+            o.amount += item.price * item.count
+          }
+        })
       return o;
-      }
+    }
   }
 })

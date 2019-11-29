@@ -36,10 +36,9 @@
         <div>联系我们</div>
       </van-grid-item>
     </van-grid>
-
-    <!--axios学习-->
   </div>
 </template> 
+
 <style scoped>
 /* .swipelist {
   height: 9rem;
@@ -82,7 +81,6 @@ export default {
       menu6: require("../../assets/img/menu6.png")
     };
   },
-
   created() {
     this.getSwiper();
   },

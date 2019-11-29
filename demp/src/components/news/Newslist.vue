@@ -22,7 +22,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 .news {
   display: flex;
   border-bottom: 0.01rem solid rgba(100, 120, 60, 0.5);
@@ -53,7 +53,7 @@
 </style>
 
 <script>
-import Vue from "vue";
+// import Vue from "vue";
 import axios from "axios";
 // import Newsinfo from "./Newsinfo";
 // import img from "../../assets/img/news.jpg";

@@ -51,7 +51,7 @@
 export default {
   data() {
     return {
-      active: '',
+      active: this.$route.path,
       flag: false
     };
   },
@@ -96,12 +96,12 @@ export default {
     //深度监听：immediate执行handler里的方法
     "$route.path": {
       handler: function(newVal) {
-        if(newVal.lastIndexOf('/')>0){
-          alert('0')
-          var act= newVal.split("/")
-          // alert(act)
-          var ive= act[0]
-        }
+        // if(newVal.lastIndexOf('/')>0){
+        //   alert('0')
+        //   var act= newVal.split("/")
+        //   // alert(act)
+        //   var ive= act[0]
+        // }
         if (
           newVal === "/home" ||
           newVal === "/member" ||
@@ -109,8 +109,8 @@ export default {
           newVal === "/search"
         ) {
           this.flag = false;
-          // this.active=newVal.replace('/','');
-          this.active=ive;
+          this.active = newVal.replace("/", "");
+          // this.active=ive;
           // alert(ive)
         } else {
           this.flag = true;
@@ -118,25 +118,25 @@ export default {
       },
       immediate: true
     }
-  },
-  "$route.path": {
-    handler: function() {
-      switch (this.$route.path) {
-        case "/home":
-          this.active = "home";
-          break;
-        case "/member":
-          this.active = "member";
-          break;
-        // case :
-        // this.active='shopcar'
-        // break;
-        // case :
-        // this.active='search'
-        // break;
-      }
-    },
-    immediate: true
   }
+  // "$route.path": {
+  //   handler: function() {
+  //     switch (this.$route.path) {
+  //       case "/home":
+  //         this.active = "home";
+  //         break;
+  //       case "/member":
+  //         this.active = "member";
+  //         break;
+  //       // case :
+  //       // this.active='shopcar'
+  //       // break;
+  //       // case :
+  //       // this.active='search'
+  //       // break;
+  //     }
+  //   },
+  //   immediate: true
+  // }
 };
 </script>

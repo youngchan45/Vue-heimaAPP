@@ -7,8 +7,6 @@
 </template>
 
 <script>
-
-
 export default {
   data() {
     return {
@@ -22,7 +20,6 @@ export default {
     reduce(){
       this.$store.commit('add2',3)
     }
-  },
-  
+  }, 
 }
 </script>
